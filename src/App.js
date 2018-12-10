@@ -1,19 +1,31 @@
 import React, { Component } from "react";
 import "./App.css";
+import styled, { css, keyframes } from 'styled-components'
+import moment from 'moment'
 
 const photosArray = [
+  "14556495_10101285566237364_1196205247747847741_o.jpg",
+  "14612633_10101285567814204_4345032939098347973_o.jpg",
+  "14681068_10101285565309224_7442739408305882041_o.jpg",
+  "14708063_10101285567914004_7896404655842295807_o.jpg",
+  "14753200_10101285566621594_1577218458635211753_o.jpg",
+  "14753674_10101285567629574_3980307544744865446_o.jpg",
+  "14753899_10101285566287264_3488429572464063232_o.jpg",
   "14883601_10101300137691054_3249784601563954721_o.jpg",
+  "15337386_10101337706592674_3211172537967177254_n.jpg",
   "15541269_10101353224394874_1777136043483894899_n.jpg",
   "15622538_10101359084780614_3842607350624143804_n.jpg",
   "15726781_10101360459061544_8058712974648333673_n.jpg",
+  "15740936_10101365281552234_8248883985284465725_n.jpg",
   "15822533_10101367247003454_7404835624270307467_n.jpg",
-  "15826895_10101372864321304_934226146359357290_n.jpg",
   "16142728_10101392608423964_1456078671021762003_n.jpg",
   "16265369_10101401365549614_1384933196384298888_n.jpg",
   "17424857_10101452681377284_6457856483919578714_n.jpg",
   "17425848_10101452681402234_644604989928494298_n.jpg",
   "17966322_10101475599878424_925898012871795018_o.jpg",
   "18320599_10101496248124174_2814615810908712238_o.jpg",
+  "18485870_10101508448005514_2653497456430566195_n.jpg",
+  "18582148_10101508448354814_2368390000657955075_n.jpg",
   "18879865_10101525506355444_2363565740918338425_o.jpg",
   "19679251_10101557472025984_3132833071654113019_o.jpg",
   "19875344_10101565075882794_941460730862621541_n.jpg",
@@ -21,6 +33,7 @@ const photosArray = [
   "20840919_10101598604995184_487881975175730887_n.jpg",
   "21078434_10101607665083694_8344717499530960699_n.jpg",
   "21105978_10101607664978904_4333559728083448168_n.jpg",
+  "21270840_10101611777627124_8719157335649179014_n.jpg",
   "22549878_10101652172834804_678833973563507654_n.jpg",
   "22552407_10101652172969534_4831403096547487857_n.jpg",
   "22552708_10101652173488494_843203955230869426_n.jpg",
@@ -37,30 +50,87 @@ const photosArray = [
   "28166447_10101747679683314_1447165150500269568_n.jpg",
   "29513266_10101767117365044_1265867492245372928_n.jpg",
   "29683519_10101778852647444_1053108642196226048_o.jpg",
+  "29683555_10101775244034134_4591226858855825054_n.jpg",
   "29791703_10101779391013554_3225172899132342272_o.jpg",
   "30415579_10101781213067144_2158543755722883072_o.jpg",
+  "30531412_10101781202628064_6356951532549701632_n.jpg",
   "30709714_10101787259145754_3097592239929425920_n.jpg",
   "30743658_10101787260073894_9203603625241214976_n.jpg",
+  "30762564_10101787260023994_3335778447422128128_n.jpg",
   "31036906_10101787259480084_3419493179701854208_n.jpg",
   "31957635_10101795854630334_2036861976402984960_n.jpg",
+  "32105144_10101797823529644_804229473670004736_n.jpg",
+  "32777277_10101801808937854_296500881141006336_n.jpg",
+  "32977818_10101803521136594_4185159525000544256_n.jpg",
   "32978807_10101803522059744_8577104511074566144_n.jpg",
+  "33021035_10101803520976914_6220326307876569088_n.jpg",
+  "33034512_10101803520597674_6712703042317189120_n.jpg",
+  "33081258_10101803520712444_3245541154468397056_n.jpg",
+  "33116205_10101803521106654_8550037923527917568_n.jpg",
   "33125665_10101803521435994_2529104969856974848_n.jpg",
   "33154317_10101803521575714_6073894053663997952_n.jpg",
+  "33178127_10101803521006854_4050071095460495360_n.jpg",
   "34721597_10101813925855454_8110259849675145216_o.jpg",
   "35705142_10101822086032394_3329968722470240256_o.jpg",
   "35785602_10101822085822814_8838566589453303808_o.jpg",
   "36063701_10101822086556344_7576140504178360320_o.jpg",
-  "36177216_10101822087065324_2352458380926255104_o.jpg"
+  "36177216_10101822087065324_2352458380926255104_o.jpg",
+  "39746465_10101856410161564_2484503757417611264_o.jpg",
+  "Petia + Richard-4.jpg",
+  "Petia + Richard-91.jpg"
 ];
+
+const fadein = keyframes`
+0% { opacity: 0; }
+100% { opacity: 1; }
+`
+
+const animation = css`
+    ${fadein} 2s;
+  `
+
+const PictureFrame = styled.div`
+display: flex;
+justify-content: center;
+background-repeat: no-repeat;
+height: 100vh;
+width: 100%;
+background-position: center;
+animation: ${animation};
+background-image: ${props => props.selectedPhoto.backgroundImage};
+`
+
+const loveAdjectives = ['an incredible', 'a stupendous', 'a phenomenal', 'a mind-boggling', 'a neverending', 'an immeasurable', 'a crazy', 'a flabbergasting']
+
+const GreetingsFrame = ({ selectedWord }) => {
+  return (
+    <div className="greetingsFrame" >
+      <h1>Hello, Petia!</h1>
+      <h2>It's {moment().format('h:mm a')}<br/>{moment().format('dddd Do MMMM')} </h2>
+      <h2>{selectedWord && `Richard loves you ${selectedWord} amount`}</h2>
+    </div>
+  )
+}
+
 class App extends Component {
   state = {
-    selectedPhoto: ""
+    selectedPhoto: "",
+    showGreeting: true
   };
 
   componentDidMount = () => {
     this.selectRandomPhoto();
-    setInterval(() => this.selectRandomPhoto(), 5000);
+    this.selectAdjective()
+    setInterval(() =>
+      this.selectRandomPhoto(), 5000);
+      setInterval(() => this.selectAdjective(), 5000)
   };
+
+  selectAdjective = () => {
+    const randomIndex = Math.floor(Math.random() * loveAdjectives.length)
+    const selectedWord = loveAdjectives[randomIndex]
+    this.setState({ selectedWord })
+  }
 
   selectRandomPhoto = () => {
     const randomIndex = Math.floor(Math.random() * photosArray.length);
@@ -71,22 +141,14 @@ class App extends Component {
   };
 
   render() {
-    console.log("state is: ", this.state);
     return (
-      <div
-        className="pictureFrame"
-        style={{
-          backgroundImage: `url(${this.state.selectedPhoto})`,
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          backgroundRepeat: "no-repeat",
-          width: "100%",
-          backgroundPosition: "center"
-        }}
-      >
+      <React.Fragment>
+      <PictureFrame selectedPhoto={{backgroundImage: `url(${this.state.selectedPhoto})`}}/>
+      <div onClick={() => this.setState({ showGreeting: !this.state.showGreeting})} style={{position: "fixed", top: "0", left: "0",height: "100vh", width:"100vw" }}>
+      {this.state.showGreeting && <GreetingsFrame selectedWord={this.state.selectedWord}/>}
       </div>
-    );
+      </React.Fragment>
+    )
   }
 }
 
