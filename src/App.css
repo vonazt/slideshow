@@ -1,17 +1,21 @@
 .greetingsFrame {
    border: 5px solid white;
    position: absolute;
-  top: 15%;
-  left: 27%;
+  top: 14%;
+  left: 30%;
   height: 70%;
-  width: 45%;
+  width: 40%;
   text-align: center;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    )
 
 }
 
 h1 {
   color: white;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Kaushan Script', cursive;
   text-transform: uppercase;
     text-shadow: 2px 2px black;
   font-size: 4rem;
@@ -19,7 +23,7 @@ h1 {
 
 h2 {
   color: white;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Kaushan Script', cursive;
   text-transform: uppercase;
   text-shadow: 2px 2px black;
   font-size: 3rem;
