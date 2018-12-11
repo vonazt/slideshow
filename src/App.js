@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+
 import "./App.css";
 import styled, { css, keyframes } from 'styled-components'
 import moment from 'moment'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faFacebook, faInstagram, faAmazon } from '@fortawesome/free-brands-svg-icons'
 
 const photosArray = [
   "13613249_10101285564855134_8334212491284719812_o.jpg",
@@ -153,6 +157,12 @@ const GreetingsFrame = ({ selectedWord, timeOfDay }) => {
       <h1>{`Good ${timeOfDay} Petia!`}</h1>
       <h2>It's {moment().format('h:mm a')}<br/>{moment().format('dddd Do MMMM')} </h2>
       <h2>{selectedWord && `Richard loves you ${selectedWord} amount`}</h2>
+      <div className="icons">
+      <a href="https://gmail.com"><FontAwesomeIcon icon={faEnvelope} size="3x" color="white" style={{paddingRight: "2rem"}}/></a>
+      <a href="https://facebook.com"><FontAwesomeIcon icon={faFacebook} size="3x" color="white" style={{paddingRight: "2rem"}}/></a>
+      <a href="https://instagram.com"><FontAwesomeIcon icon={faInstagram} size="3x" color="white" style={{paddingRight: "1.6rem"}}/></a>
+      <a href="https://amazon.co.uk"><FontAwesomeIcon icon={faAmazon} size="3x" color="white"/></a>
+      </div>
     </div>
   )
 }
@@ -165,15 +175,15 @@ class App extends Component {
 
   componentDidMount = () => {
     const time = moment().format("HH");
-    if (time > 12 && time < 18) this.setState({ timeOfDay: "afternoon" });
-    if (time > 4 && time < 12) this.setState({ timeOfDay: "morning" });
-    if (time > 18 || time < 4) this.setState({ timeOfDay: "evening" });
+    if (time >= 12 && time < 18) this.setState({ timeOfDay: "afternoon" });
+    if (time >= 4 && time < 12) this.setState({ timeOfDay: "morning" });
+    if (time >= 18 || time < 4) this.setState({ timeOfDay: "evening" });
     this.selectRandomPhoto();
     this.selectAdjective()
     setInterval(() =>
       this.selectRandomPhoto(), 5000);
       setInterval(() => this.selectAdjective(), 5000)
-  };
+ };
 
   selectAdjective = () => {
     const randomIndex = Math.floor(Math.random() * loveAdjectives.length)

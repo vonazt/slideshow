@@ -16,7 +16,7 @@
 h1 {
   color: white;
   font-family: 'Kaushan Script', cursive;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
     text-shadow: 2px 2px black;
   font-size: 4rem;
 }
@@ -24,7 +24,13 @@ h1 {
 h2 {
   color: white;
   font-family: 'Kaushan Script', cursive;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   text-shadow: 2px 2px black;
   font-size: 3rem;
+}
+
+.icons {
+  position: absolute;
+  top: 90%;
+  left: 30%;
 }
