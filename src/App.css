@@ -1,10 +1,10 @@
 .greetingsFrame {
    border: 5px solid white;
    position: absolute;
-  top: 14%;
-  left: 30%;
-  height: 70%;
-  width: 40%;
+  top: 10%;
+  left: 25%;
+  height: 80%;
+  width: 50%;
   text-align: center;
   background-image: linear-gradient(
       rgba(0, 0, 0, 0.3),
@@ -30,5 +30,5 @@ h2 {
 .icons {
   position: absolute;
   top: 90%;
-  left: 20%;
+  left: 25%;
 }

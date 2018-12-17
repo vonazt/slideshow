@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import axios from 'axios'
 import "./App.css";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -208,7 +208,7 @@ const verbs = [
   "needs",
   "wants",
   "is amazed by",
-  "is amused by you",
+  "is amused by",
   "is proud of",
   'enjoys kissing',
   'is enamoured with',
@@ -229,7 +229,7 @@ const loveAdjectives = [
   "a shocking"
 ];
 
-const GreetingsFrame = ({ selectedAdjective, selectedVerb, timeOfDay }) => {
+const GreetingsFrame = ({ selectedAdjective, selectedVerb, timeOfDay, temperature, feelsLike, chanceOfRain }) => {
   return (
     <div className="greetingsFrame">
       <h1>{`Good ${timeOfDay} Petia!`}</h1>
@@ -237,6 +237,11 @@ const GreetingsFrame = ({ selectedAdjective, selectedVerb, timeOfDay }) => {
         It's {moment().format("h:mm a")}
         <br />
         {moment().format("dddd Do MMMM")}{" "}
+      </h2>
+      <h2>
+        Temperature: {temperature}&deg;C ({feelsLike}&deg;C)
+        <br />
+        Chance of rain: {chanceOfRain}%
       </h2>
       <h2>
         {selectedVerb &&
@@ -297,7 +302,13 @@ class App extends Component {
     showGreeting: true
   };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
+    // const {data: {Locations: {Location: forecast}}} = await axios.get(`http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist?key=1fa41a68-8964-48cc-b5cf-d6a6e7089375`)
+    // console.log('forecast: ', forecast.filter(forecast => forecast.name.toLowerCase() === 'london'))
+    const {data: {SiteRep: {DV: {Location: {Period}}}}} = await axios.get(`http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/352409?res=3hourly&key=1fa41a68-8964-48cc-b5cf-d6a6e7089375`)
+
+    this.setState({temperature: Period[0].Rep[0].T, chanceOfRain: Period[0].Rep[0].Pp, feelsLike: Period[0].Rep[0].F})
+    
     const time = moment().format("HH");
     if (time >= 12 && time < 18) this.setState({ timeOfDay: "afternoon" });
     if (time >= 4 && time < 12) this.setState({ timeOfDay: "morning" });
@@ -371,6 +382,9 @@ class App extends Component {
               selectedAdjective={this.state.selectedAdjective}
               selectedVerb={this.state.selectedVerb}
               timeOfDay={this.state.timeOfDay}
+              temperature={this.state.temperature}
+              feelsLike={this.state.feelsLike}
+              chanceOfRain={this.state.chanceOfRain}
             />
           )}
         </div>
