@@ -8,6 +8,7 @@
   height: 100vh;
   width: 100vw;
   background-position: center;
+  background-size: cover;
 }
 
 .top {
@@ -18,6 +19,7 @@
   background-repeat: no-repeat;
   height: 100vh;
   width: 100vw;
+  background-size: cover;
   background-position: center;
   animation-name: cf3FadeInOut;
   animation-timing-function: ease-in;
